@@ -5,6 +5,7 @@ using SLZ.Rig;
 using BoneLib.BoneMenu;
 using BoneLib.BoneMenu.Elements;
 using BoneLib;
+using Harmony;
 
 namespace FloppyArms
 {
@@ -20,6 +21,12 @@ namespace FloppyArms
     public class FloppyArms : MelonMod
     {
 
+        public static bool IsEnabled { get; private set; }
+        public static void OnSetEnabled(bool value)
+        {
+            
+        }
+
         private MelonPreferences_Category FloppyArmsCategory;
         private MelonPreferences_Entry<bool> MogToggle;
 
@@ -33,11 +40,10 @@ namespace FloppyArms
         public static void CreateBoneMenu()
         {
             MenuCategory menuCategory = MenuManager.CreateCategory("Floppy Arms", Color.blue);
-            menuCategory.CreateBoolElement("Mod Toggle", Color.magenta, FloppyArms.IsEnabled, new Action<bool>(FloppyArms.));
+            menuCategory.CreateBoolElement("Mog Toggle", Color.cyan, FloppyArms.IsEnabled, new Action<bool>(FloppyArms.OnSetEnabled));
         }
-        public static bool IsEnabled { get; private set; }
 
-        public static bool OnSetEnabled { get; private set; }
+
 
     }
 }
