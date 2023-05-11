@@ -32,7 +32,6 @@ namespace FloppyArms
 
         public override void OnInitializeMelon()
         {
-            SetupMelonPrefs();
             FloppyArms.SetupBoneMenu();
         }
 
@@ -41,20 +40,6 @@ namespace FloppyArms
             MenuCategory menuCategory = MenuManager.CreateCategory("Floppy Arms", Color.blue);
             menuCategory.CreateBoolElement("Mog Toggle", Color.cyan, FloppyArms.IsEnabled, new Action<bool>(FloppyArms.OnSetEnabled));
         }
-
-        public void SetupMelonPrefs()
-        {
-            FloppyArmsCategory = MelonPreferences.CreateCategory("Floppy Arms");
-            MogToggle = FloppyArmsCategory.CreateEntry<bool>("Mog Toggle", false);
-        }
-        
-        //public void armsRagdoll()
-        //{
-        // if(IsEnabled)
-        //{
-        // Player.physicsRig.leftHand.physHand.forceMultiplier = 0;
-        //}
-        // }
 
     }
 }
