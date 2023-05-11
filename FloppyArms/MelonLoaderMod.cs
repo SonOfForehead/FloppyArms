@@ -23,12 +23,20 @@ namespace FloppyArms
         public static bool IsEnabled { get; private set; }
         public static void OnSetEnabled(bool value)
         {
-            Player.physicsRig.leftHand.physHand.forceMultiplier = 0;
-            Player.physicsRig.rightHand.physHand.forceMultiplier = 0;
-        }
+            FloppyArms.IsEnabled = value;
 
-        private MelonPreferences_Category FloppyArmsCategory;
-        private MelonPreferences_Entry<bool> MogToggle;
+            if (IsEnabled == true)
+            {
+                Player.physicsRig.leftHand.physHand.forceMultiplier = 0;
+                Player.physicsRig.rightHand.physHand.forceMultiplier = 0;
+            }
+
+            else
+            {
+                Player.physicsRig.leftHand.physHand.forceMultiplier = 1;
+                Player.physicsRig.rightHand.physHand.forceMultiplier = 1;
+            }
+        }
 
         public override void OnInitializeMelon()
         {
