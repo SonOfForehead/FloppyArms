@@ -5,7 +5,6 @@ using SLZ.Rig;
 using BoneLib.BoneMenu;
 using BoneLib.BoneMenu.Elements;
 using BoneLib;
-using Harmony;
 
 namespace FloppyArms
 {
@@ -24,7 +23,8 @@ namespace FloppyArms
         public static bool IsEnabled { get; private set; }
         public static void OnSetEnabled(bool value)
         {
-            
+            Player.physicsRig.leftHand.physHand.forceMultiplier = 0;
+            Player.physicsRig.rightHand.physHand.forceMultiplier = 0;
         }
 
         private MelonPreferences_Category FloppyArmsCategory;
@@ -32,18 +32,29 @@ namespace FloppyArms
 
         public override void OnInitializeMelon()
         {
-            FloppyArmsCategory = MelonPreferences.CreateCategory("Floppy Arms");
-            MogToggle = FloppyArmsCategory.CreateEntry<bool>("Mog Toggle", true);
-            FloppyArms.CreateBoneMenu();
+            SetupMelonPrefs();
+            FloppyArms.SetupBoneMenu();
         }
 
-        public static void CreateBoneMenu()
+        public static void SetupBoneMenu()
         {
             MenuCategory menuCategory = MenuManager.CreateCategory("Floppy Arms", Color.blue);
             menuCategory.CreateBoolElement("Mog Toggle", Color.cyan, FloppyArms.IsEnabled, new Action<bool>(FloppyArms.OnSetEnabled));
         }
 
-
+        public void SetupMelonPrefs()
+        {
+            FloppyArmsCategory = MelonPreferences.CreateCategory("Floppy Arms");
+            MogToggle = FloppyArmsCategory.CreateEntry<bool>("Mog Toggle", false);
+        }
+        
+        //public void armsRagdoll()
+        //{
+        // if(IsEnabled)
+        //{
+        // Player.physicsRig.leftHand.physHand.forceMultiplier = 0;
+        //}
+        // }
 
     }
 }
